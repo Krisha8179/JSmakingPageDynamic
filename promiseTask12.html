@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+ 
+    <script>
+        const user={
+            username:'brendon',
+            posts:[],
+            LastUserActivityTime:'13th of jan'
+        };
+        function createPost(post) {
+            return new Promise( (resolve, reject) => {
+                setTimeout( () => {
+                    user.posts.push(post);
+                    resolve(user.posts)
+                }, 1000)
+            }) 
+        }
+        function updateLastUserActivityTime(){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    user.LastUserActivityTime = new Date();
+                    resolve(user.LastUserActivityTime);
+                },1000)
+            })
+        }
+        function deletePost(){
+            return new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                        user.posts.pop();
+                        resolve(user.posts);
+                },1000)
+            })
+        }
+
+        function userUpdatePosts(post){
+
+            Promise.all([createPost(post), updateLastUserActivityTime()])
+            .then(([createresolve, updatetimeResolve]) =>{
+                console.log(createresolve)
+                console.log(updatetimeResolve)
+            })
+        }
+        
+        function userDeletePosts(){
+            Promise.all([deletePost(), updateLastUserActivityTime()])
+            .then(([deleteresolve, updatetimeResolve]) =>{
+                console.log(deleteresolve)
+                console.log(updatetimeResolve)
+            })
+            
+        }       
+
+        
+
+        userUpdatePosts({title:'Post1'});
+        userUpdatePosts({title:'Post2'});
+        userUpdatePosts({title:'Post3'});
+        userDeletePosts();
+
+
+
+    </script>
+</body>
+
+</html>
