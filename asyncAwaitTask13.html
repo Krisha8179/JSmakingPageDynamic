@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // console.log('person1:show tick');
+        // console.log('person2:show tick');
+        // // const promiseWifeBringingTick = new Promise((resolve, reject) =>{
+        // //     setTimeout(() =>{
+        // //         resolve('tick');
+        // //     },3000)
+        // // });
+
+        // // const getPopcorn = promiseWifeBringingTick.then((t) =>{
+        // //     console.log('husband: we should go in');
+        // //     console.log('wife: no i am hungry');
+        // //     return new Promise((resolve, reject) => resolve(`${t} popcorn`))
+        // // });
+
+        // // const getButter = getPopcorn.then((t) => {
+        // //     console.log('husband: got popcorn');
+        // //     console.log('wife: i need butter');
+        // //     return new Promise((resolve, reject) => resolve(`${t} butter`))
+        // // });
+
+        // // getButter.then((t) => console.log(t));
+
+        // const preMovie = async ()=>{
+        //     const promiseWifeBringingTick = new Promise((resolve, reject) => {
+        //         setTimeout(() => resolve('ticket'),3000);
+        //     });
+
+        //     const getPopcorn = new Promise((resolve, reject) => resolve('popcorn'));
+
+        //     const addButter = new Promise((resolve, reject) => resolve('butter'));
+            
+        //     const getColdDrinks = new Promise((resolve, reject) => resolve('coldDrinks'));
+
+        //     let ticket = await promiseWifeBringingTick;
+
+        //     console.log(`wife: i have the ${ticket}`);
+        //     console.log('husband: we should go in');
+        //     console.log('wife: no i am hungry');
+
+        //     let popcorn = await getPopcorn;
+
+        //     console.log(`husband: got ${popcorn}`);
+        //     console.log('wife: i need butter');
+
+        //     let butter = await addButter;
+
+        //     console.log(`husband: got ${butter}`);
+        //     console.log('wife: and i also need coldDrink');
+
+        //     let coldDrink = await getColdDrinks;
+
+        //     console.log(`husband: got ${coldDrink}`);
+        //     console.log('wife: lets go');
+
+
+
+
+        //     return ticket;
+        // } 
+        // preMovie().then((m)=>console.log(m));
+        // console.log('person4:show tick');
+        // console.log('person5:show tick');
+
+
+        const user={
+            username:'brendon',
+            posts:[{title:'post1'}],
+            
+        }
+
+        const prePost = async () =>{
+        
+                const promiseCreatePost = new Promise((resolve, reject) =>{
+                setTimeout(()=>{
+                    user.posts.push({title:'post2'});
+                    resolve(user.posts);
+
+                },1000)
+                })
+
+                let createPost = await promiseCreatePost;
+                console.log(createPost);
+                const promiseDeletePost = new Promise((resolve, reject)=>{
+                    setTimeout(()=>{
+                        if(user.posts.length>0){
+                            user.posts.pop();
+                            resolve(user.posts);
+                        }
+                        else{
+                            reject('array is empty')
+                        }
+                    },1000)
+
+                })
+
+                
+                let deletePost
+                try{
+                    deletePost=await promiseDeletePost
+                }catch(e){
+                    console.log(e);
+                }
+
+                
+                console.log(deletePost);
+            
+            
+
+        }
+        prePost();
+
+
+    </script>
+</body>
+</html>
