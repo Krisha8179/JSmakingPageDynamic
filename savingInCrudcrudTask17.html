@@ -50,45 +50,7 @@
             console.log(err);
         })
 
-        localStorage.setItem(email.value,JSON.stringify(obj));
-
-        function showonScreen(obj){
-
-            let keys = Object.keys(localStorage);
-    
-            for(i=keys.length-1;i>=0;i--){
-                const li = document.createElement("li");
-                let innerkeys=keys[i];
-                let inneramount=(JSON.parse(localStorage.getItem(`${innerkeys}`))).amount;
-                let innerdescription=(JSON.parse(localStorage.getItem(`${innerkeys}`))).description;
-                let inneroption=(JSON.parse(localStorage.getItem(`${innerkeys}`))).option;
-                
-                li.appendChild(document.createTextNode(`${inneramount}-${inneroption}-${innerdescription}`));
-                const deleteBtn = document.createElement("input");
-                deleteBtn.type = "button";
-                deleteBtn.value = "Delete Expense";
-                deleteBtn.onclick = () =>{
-                    localStorage.removeItem(innerdescription);
-                    users.removeChild(li);
-                }
-                const editBtn = document.createElement("input");
-                editBtn.type = "button";
-                editBtn.value = "Edit Expense";
-                editBtn.onclick = () =>{
-                    localStorage.removeItem(innerdescription);
-                    users.removeChild(li);
-                    amount.value = inneramount;
-                    description.value = innerdescription;
-                    option.value = inneroption;
-                }
-                li.appendChild(deleteBtn);
-                li.appendChild(editBtn);
-
-                users.appendChild(li);
-
-
-            }
-    }
+        localStorage.setItem(email.value,JSON.stringify(obj))
         
         li.appendChild(document.createTextNode(`${obj.name}-${obj.email}-${obj.number}`));
         const deleteBtn = document.createElement("input");
